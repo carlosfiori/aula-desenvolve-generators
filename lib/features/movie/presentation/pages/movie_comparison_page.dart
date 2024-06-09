@@ -3,7 +3,9 @@ import 'package:generators/features/movie/data/models/movie.dart';
 import 'package:generators/features/movie/data/providers/movie_provider.dart';
 
 class MovieComparisonPage extends StatefulWidget {
-  const MovieComparisonPage({super.key});
+  const MovieComparisonPage({super.key, required this.title});
+
+  final String title;
 
   @override
   State<MovieComparisonPage> createState() => _MovieComparisonPageState();
@@ -26,7 +28,7 @@ class _MovieComparisonPageState extends State<MovieComparisonPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Comparação de filmes'),
+        title: Text(widget.title),
       ),
       body: FutureBuilder(
         future: _future,

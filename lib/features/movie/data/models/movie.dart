@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class Movie {
   Movie({
     required this.id,
@@ -74,11 +72,6 @@ class Movie {
         url.hashCode;
   }
 
-  @override
-  String toString() {
-    return 'Movie(id: $id, title: $title, image: $image, movieBanner: $movieBanner, description: $description, director: $director, producer: $producer, releaseDate: $releaseDate, runningTime: $runningTime, rtScore: $rtScore, url: $url)';
-  }
-
   Movie copyWith({
     String? id,
     String? title,
@@ -105,8 +98,6 @@ class Movie {
         rtScore: rtScore ?? this.rtScore,
         url: url ?? this.url,
       );
-
-  String toRawJson() => json.encode(toJson());
 
   Map<String, dynamic> toJson() => {
         "id": id,

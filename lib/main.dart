@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:generators/features/movie/presentation/pages/movie_comparison_page.dart';
 import 'package:generators/features/movie/presentation/pages/movies_list_page.dart';
+import 'package:generators/my_home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,47 +21,14 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const MyHomePage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const MyHomePage(),
+        '/movies': (context) => const MoviesListPage(),
+        '/movie-comparison': (context) => MovieComparisonPage(
+              title: ModalRoute.of(context)!.settings.arguments as String,
+            ),
+      },
     );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('Geradores'),
-        ),
-        body: Column(
-          children: [
-            Card(
-              child: ListTile(
-                title: const Text('Lista de filmes'),
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const MoviesListPage(),
-                    ),
-                  );
-                },
-              ),
-            ),
-            Card(
-              child: ListTile(
-                title: const Text('Comparação de filmes'),
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const MovieComparisonPage(),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ],
-        ));
   }
 }
