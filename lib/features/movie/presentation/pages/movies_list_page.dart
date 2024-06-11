@@ -1,15 +1,17 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:generators/features/movie/data/models/movie.dart';
 import 'package:generators/features/movie/data/providers/movie_provider.dart';
 
-class MoviesListPage extends StatefulWidget {
-  const MoviesListPage({super.key});
+@RoutePage(name: 'PaginaDeFilmes')
+class QualquerCoisa extends StatefulWidget {
+  const QualquerCoisa({super.key});
 
   @override
-  State<MoviesListPage> createState() => _MoviesListPageState();
+  State<QualquerCoisa> createState() => _QualquerCoisaState();
 }
 
-class _MoviesListPageState extends State<MoviesListPage> {
+class _QualquerCoisaState extends State<QualquerCoisa> {
   late final Future<List<Movie>> _future;
 
   @override
@@ -44,7 +46,7 @@ class _MoviesListPageState extends State<MoviesListPage> {
             itemBuilder: (context, index) {
               final movie = movies[index];
               return ListTile(
-                title: Text(movie.title),
+                title: Text('${movie.title} - ${movie.originalTitle}'),
                 subtitle: Text(movie.description),
                 onTap: () {
                   showDialog(

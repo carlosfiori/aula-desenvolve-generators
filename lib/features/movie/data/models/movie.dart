@@ -1,5 +1,15 @@
-class Movie {
-  Movie({
+import 'package:autoequal/autoequal.dart';
+import 'package:copy_with_extension/copy_with_extension.dart';
+import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+part 'movie.g.dart';
+
+@autoequal
+@CopyWith()
+@JsonSerializable(fieldRename: FieldRename.snake)
+class Movie extends Equatable {
+  const Movie({
     required this.id,
     required this.title,
     required this.image,
@@ -11,27 +21,19 @@ class Movie {
     required this.runningTime,
     required this.rtScore,
     required this.url,
+    required this.originalTitle,
+    required this.originalTitleRomanised,
   });
 
-  factory Movie.fromJson(Map<String, dynamic> json) => Movie(
-        id: json["id"],
-        title: json["title"],
-        image: json["image"],
-        movieBanner: json["movie_banner"],
-        description: json["description"],
-        director: json["director"],
-        producer: json["producer"],
-        releaseDate: json["release_date"],
-        runningTime: json["running_time"],
-        rtScore: json["rt_score"],
-        url: json["url"],
-      );
+  factory Movie.fromJson(Map<String, dynamic> json) => _$MovieFromJson(json);
 
   final String description;
   final String director;
   final String id;
   final String image;
   final String movieBanner;
+  final String originalTitle;
+  final String originalTitleRomanised;
   final String producer;
   final String releaseDate;
   final String rtScore;
@@ -40,76 +42,7 @@ class Movie {
   final String url;
 
   @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
+  List<Object?> get props => _$props;
 
-    return other is Movie &&
-        other.id == id &&
-        other.title == title &&
-        other.image == image &&
-        other.movieBanner == movieBanner &&
-        other.description == description &&
-        other.director == director &&
-        other.producer == producer &&
-        other.releaseDate == releaseDate &&
-        other.runningTime == runningTime &&
-        other.rtScore == rtScore &&
-        other.url == url;
-  }
-
-  @override
-  int get hashCode {
-    return id.hashCode ^
-        title.hashCode ^
-        image.hashCode ^
-        movieBanner.hashCode ^
-        description.hashCode ^
-        director.hashCode ^
-        producer.hashCode ^
-        releaseDate.hashCode ^
-        runningTime.hashCode ^
-        rtScore.hashCode ^
-        url.hashCode;
-  }
-
-  Movie copyWith({
-    String? id,
-    String? title,
-    String? image,
-    String? movieBanner,
-    String? description,
-    String? director,
-    String? producer,
-    String? releaseDate,
-    String? runningTime,
-    String? rtScore,
-    String? url,
-  }) =>
-      Movie(
-        id: id ?? this.id,
-        title: title ?? this.title,
-        image: image ?? this.image,
-        movieBanner: movieBanner ?? this.movieBanner,
-        description: description ?? this.description,
-        director: director ?? this.director,
-        producer: producer ?? this.producer,
-        releaseDate: releaseDate ?? this.releaseDate,
-        runningTime: runningTime ?? this.runningTime,
-        rtScore: rtScore ?? this.rtScore,
-        url: url ?? this.url,
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "title": title,
-        "image": image,
-        "movie_banner": movieBanner,
-        "description": description,
-        "director": director,
-        "producer": producer,
-        "release_date": releaseDate,
-        "running_time": runningTime,
-        "rt_score": rtScore,
-        "url": url,
-      };
+  Map<String, dynamic> toJson() => _$MovieToJson(this);
 }

@@ -1,17 +1,24 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:generators/features/movie/data/models/movie.dart';
 import 'package:generators/features/movie/data/providers/movie_provider.dart';
 
-class MovieComparisonPage extends StatefulWidget {
-  const MovieComparisonPage({super.key, required this.title});
+@RoutePage(name: "MovieComparisonRoute")
+class ComparacaoPage extends StatefulWidget {
+  const ComparacaoPage({
+    super.key,
+    required this.title,
+    required this.subtitle,
+  });
 
   final String title;
+  final String subtitle;
 
   @override
-  State<MovieComparisonPage> createState() => _MovieComparisonPageState();
+  State<ComparacaoPage> createState() => _ComparacaoPageState();
 }
 
-class _MovieComparisonPageState extends State<MovieComparisonPage> {
+class _ComparacaoPageState extends State<ComparacaoPage> {
   late final Future<List<Movie>> _future;
   Movie? _selectedMovie1;
   Movie? _selectedMovie2;
@@ -45,7 +52,7 @@ class _MovieComparisonPageState extends State<MovieComparisonPage> {
 
           return Column(
             children: [
-              const Text("Selecione um filme de cada lista para comparar:"),
+              Text(widget.subtitle),
               SizedBox(
                 height: 200,
                 child: Row(
